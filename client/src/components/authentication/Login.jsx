@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
-
 const Login = () => {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const [userData, setUserData] = useState(initialValues);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userData)
+    setUserData(initialValues)
+   
+    
+  };
+ 
   return (
     <section className="mt-14">
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -27,6 +37,10 @@ const Login = () => {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
+                    value={userData.email}
+                    onChange={(e) =>
+                      setUserData({ ...userData, email: e.target.value })
+                    }
                   ></input>
                 </div>
               </div>
@@ -44,6 +58,10 @@ const Login = () => {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     placeholder="Password"
+                    value={userData.password}
+                    onChange={(e) =>
+                      setUserData({ ...userData, password: e.target.value })
+                    }
                   ></input>
                 </div>
               </div>
