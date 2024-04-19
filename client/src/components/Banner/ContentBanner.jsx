@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import {useSound} from 'use-sound'
+import mysound from "../../assets/sounds/mouse-click.mp3"
 
 const ContentBanner = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [play] = useSound(mysound, { volume: 2.0 });
 
   const [selectedOption, setSelectedOption] = useState("Beginner");
 
@@ -92,6 +96,8 @@ const ContentBanner = () => {
               strokeWidth={3.5}
               stroke="currentColor"
               className="w-6 h-8 me-1 pe-1 text-sky-600 font-bold"
+              // onClick={()=>play()}
+              onClick={play}
             >
               <path
                 strokeLinecap="round"

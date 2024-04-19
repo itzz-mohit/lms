@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-const Banner = ({implementSearch}) => {
-  const [searchData, setSearchData] = useState("");
-  
-  const handleSearchBanner = () =>{
-    implementSearch(searchData)
+const Banner = ({container}) => {
+  const [search, setsearch] = useState("")
+  const handleSearchBar = ()=>{
+    container(search)
   }
   return (
     <div className="py-8 px-2 mt-24">
@@ -15,8 +14,8 @@ const Banner = ({implementSearch}) => {
             <input
               className="px-4 py-2 rounded-lg bg-white border border-gray-300 focus:outline-none focus:border-gray-500"
               placeholder="Search courses"
-              value={searchData}
-              onChange={(e) => setSearchData(e.target.value)}
+              value={search}
+              onChange={(e)=>setsearch(e.target.value)}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +24,7 @@ const Banner = ({implementSearch}) => {
               strokeWidth={1.5}
               stroke="currentColor"
               className="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 text-black cursor-pointer"
-              onClick={handleSearchBanner}
+              onClick={handleSearchBar}
             >
               <path
                 strokeLinecap="round"
