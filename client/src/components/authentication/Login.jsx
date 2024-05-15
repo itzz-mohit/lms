@@ -1,20 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify"; // Added ToastContainer import
+import ToastComponent from "../Toast/Toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const initialValues = {
     email: "",
     password: "",
   };
-
+  const [toastProps, setToastProps] = useState({});
   const [userData, setUserData] = useState(initialValues);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userData)
-    setUserData(initialValues)
-   
-    
+    console.log(userData);
+    setUserData(initialValues);
+    setToastProps({
+      message: "Login successful!",
+      type: "success",
+    });
   };
- 
+
+  useEffect(() => {
+    // Call the notify function when toastProps changes
+    if (toastProps.message && toastProps.type) {
+      notify();
+    }
+  }, [toastProps]);
+
+  const notify = () => {
+    switch (toastProps.type) {
+      case "success":
+        toast.success(toastProps.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        break;
+      case "error":
+        toast.error(toastProps.message, {
+          position: "top-right",
+          autoClose: false,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
+        break;
+      default:
+        toast.info(toastProps.message);
+    }
+  };
+
   return (
     <section className="mt-14">
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -83,6 +124,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <ToastComponent {...toastProps} />
     </section>
   );
 };
